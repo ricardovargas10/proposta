@@ -135,13 +135,16 @@
         .maybeSingle()
         .then(function (r) {
           if (r.error) throw traduzirErro(r.error, "buscarPublicada");
-          if (!r.data) {
+          if (r.data) return paraAplicacao(r.data);
+
+          // Não achou no banco: pode ser uma proposta de exemplo versionada
+          // em /dados/propostas (é o caso de /p/demo). Só então desiste.
+          return local.buscarPublicada(slug).catch(function () {
             throw new ErroDados(
               "Esta proposta não existe ou ainda não foi publicada.",
               "nao-encontrada"
             );
-          }
-          return paraAplicacao(r.data);
+          });
         });
     },
 

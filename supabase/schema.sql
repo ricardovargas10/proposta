@@ -29,10 +29,13 @@ alter table public.administradores enable row level security;
 -- Nenhuma política de leitura = ninguém acessa pela API pública.
 -- A função eh_admin() abaixo consulta a tabela com SECURITY DEFINER.
 
--- E-mail que vai administrar o painel. Precisa ser o MESMO usado para criar
--- o usuário em Authentication > Users.
+-- E-mails que administram o painel. Cada um só funciona de verdade se houver
+-- um usuário correspondente em Authentication > Users.
+-- Para revogar um acesso: delete from public.administradores where email = '...';
 insert into public.administradores (email)
-values ('ricardo@temeron.com.br')
+values
+  ('rfcvargas00@gmail.com'),
+  ('ricardo@temeron.com.br')
 on conflict (email) do nothing;
 
 

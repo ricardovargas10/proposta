@@ -19,9 +19,10 @@
     /* --- Supabase ------------------------------------------------------ */
     supabaseUrl: "https://lgzwjqpnngwiblnjnttu.supabase.co",
 
-    // FALTA PREENCHER. Não é uma URL: é uma chave longa que começa com "eyJ".
-    // Supabase > Project Settings > API Keys > "anon public" > botão de copiar.
-    supabaseAnonKey: "",
+    // Chave "anon public". É pública por natureza e pode ficar aqui: quem
+    // protege os dados é o RLS definido em supabase/schema.sql.
+    supabaseAnonKey:
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxnendqcXBubmd3aWJsbmpudHR1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU1MjE2NDQsImV4cCI6MjEwMTA5NzY0NH0.Mv7sGTwMIvYnE2x0eSQTpMIluVWi9hYIgQrRHesBa1o",
 
     /* --- Contato ------------------------------------------------------- */
     // Somente dígitos, com código do país. 55 = Brasil, 51 = Porto Alegre.
