@@ -1,0 +1,23 @@
+# Sistema operacional
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Editores
+.vscode/
+.idea/
+*.swp
+.claude/settings.local.json
+
+# Netlify
+.netlify/
+
+# Arquivos temporários
+*.tmp
+*.log
+
+# ATENÇÃO: assets/js/config.js NÃO está ignorado de propósito.
+# A chave "anon" do Supabase é pública por natureza — ela precisa estar no
+# código para o site funcionar, e quem protege os dados são as regras de
+# segurança do banco (supabase/schema.sql), não o sigilo dessa chave.
+# A chave que nunca pode aparecer aqui é a "service_role".

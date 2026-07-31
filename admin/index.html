@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Propostas — Painel Temeron</title>
+
+    <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700&display=swap"
+    />
+
+    <link rel="stylesheet" href="/assets/css/tokens.css" />
+    <link rel="stylesheet" href="/assets/css/base.css" />
+    <link rel="stylesheet" href="/assets/css/admin.css" />
+  </head>
+
+  <body>
+    <!-- ================= TELA DE LOGIN ================= -->
+    <div class="login" id="tela-login" hidden>
+      <div class="login__caixa">
+        <p class="login__logo">Temeron<sup>®</sup></p>
+        <p class="login__texto">Painel de propostas comerciais.</p>
+
+        <form id="form-login" novalidate>
+          <div class="campo">
+            <label class="campo__rotulo" for="email">E-mail</label>
+            <input
+              class="entrada"
+              type="email"
+              id="email"
+              name="email"
+              autocomplete="username"
+              required
+            />
+          </div>
+
+          <div class="campo">
+            <label class="campo__rotulo" for="senha">Senha</label>
+            <input
+              class="entrada"
+              type="password"
+              id="senha"
+              name="senha"
+              autocomplete="current-password"
+              required
+            />
+          </div>
+
+          <p class="nota nota--erro" id="login-erro" hidden></p>
+
+          <div class="campo login__acao">
+            <button class="botao botao--primario botao--largo" type="submit" id="botao-entrar">
+              Entrar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- ================= LISTA DE PROPOSTAS ================= -->
+    <div id="tela-lista" hidden>
+      <header class="barra">
+        <div class="barra__conteudo">
+          <span class="barra__marca">
+            Temeron<sup>®</sup>
+            <span class="barra__divisor" aria-hidden="true"></span>
+            <span class="barra__contexto">Propostas</span>
+          </span>
+
+          <div class="barra__acoes">
+            <a class="botao botao--primario" href="/admin/editor.html">Nova proposta</a>
+            <button class="botao botao--fantasma" type="button" id="botao-sair">Sair</button>
+          </div>
+        </div>
+      </header>
+
+      <main class="pagina">
+        <p class="nota nota--info" id="faixa-demo" hidden style="margin-bottom: var(--esp-5)">
+          <strong>Modo demonstração.</strong> O Supabase ainda não foi configurado, então as
+          propostas ficam salvas só neste navegador e o link não abre em outro aparelho. Dá para
+          testar tudo à vontade. Para valer, preencha <code>assets/js/config.js</code> — o passo a
+          passo está no <code>README.md</code>.
+        </p>
+
+        <div class="pagina__cabecalho">
+          <div>
+            <h1 class="pagina__titulo">Suas propostas</h1>
+            <p class="pagina__subtitulo" id="resumo-lista">Carregando…</p>
+          </div>
+        </div>
+
+        <div class="filtros">
+          <div class="abas" role="tablist" aria-label="Filtrar por status">
+            <button class="aba" type="button" role="tab" data-status="todas" aria-selected="true">
+              Todas
+            </button>
+            <button class="aba" type="button" role="tab" data-status="rascunho" aria-selected="false">
+              Rascunhos
+            </button>
+            <button
+              class="aba"
+              type="button"
+              role="tab"
+              data-status="publicada"
+              aria-selected="false"
+            >
+              Publicadas
+            </button>
+            <button
+              class="aba"
+              type="button"
+              role="tab"
+              data-status="arquivada"
+              aria-selected="false"
+            >
+              Arquivadas
+            </button>
+          </div>
+
+          <div class="busca">
+            <label class="apenas-leitor" for="busca">Buscar por cliente</label>
+            <input class="entrada" type="search" id="busca" placeholder="Buscar por cliente…" />
+          </div>
+        </div>
+
+        <p class="nota nota--erro" id="lista-erro" hidden></p>
+
+        <div class="lista" id="lista"></div>
+      </main>
+    </div>
+
+    <!-- ================= ERRO DE CONFIGURAÇÃO ================= -->
+    <div class="login" id="tela-config" hidden>
+      <div class="login__caixa">
+        <p class="login__logo">Temeron<sup>®</sup></p>
+        <h1 class="bloco__titulo" style="margin-top: var(--esp-4)">Falta configurar o Supabase</h1>
+        <p class="login__texto" id="config-texto"></p>
+        <p class="nota nota--info">
+          Abra <code>assets/js/config.js</code> e preencha <code>supabaseUrl</code> e
+          <code>supabaseAnonKey</code>. O passo a passo está no <code>README.md</code>.
+        </p>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+    <script src="/assets/js/config.js"></script>
+    <script src="/assets/js/utils.js"></script>
+    <script src="/assets/js/modelo.js"></script>
+    <script src="/assets/js/dados.js"></script>
+    <script src="/assets/js/ui.js"></script>
+    <script src="/assets/js/admin.js"></script>
+  </body>
+</html>

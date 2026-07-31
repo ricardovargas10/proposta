@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+    <meta name="theme-color" content="#ede4d3" />
+
+    <title>Proposta Comercial — Temeron</title>
+    <meta name="description" content="Proposta comercial preparada pela Temeron, consultoria de marca." />
+
+    <!-- Propostas são privadas: não devem aparecer em buscas -->
+    <meta name="robots" content="noindex, nofollow" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Temeron" />
+    <meta property="og:title" content="Proposta Comercial — Temeron" />
+    <meta property="og:description" content="Proposta comercial preparada pela Temeron, consultoria de marca." />
+    <meta property="og:image" content="/assets/img/og-padrao.png" />
+
+    <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@500;600;700&display=swap"
+    />
+
+    <link rel="stylesheet" href="/assets/css/tokens.css" />
+    <link rel="stylesheet" href="/assets/css/base.css" />
+    <link rel="stylesheet" href="/assets/css/proposta.css" />
+  </head>
+
+  <body>
+    <a class="pular-para-conteudo" href="#conteudo">Pular para o conteúdo</a>
+
+    <!-- Barra fixa: só aparece depois que a proposta carrega -->
+    <header class="topo" id="topo" hidden>
+      <div class="topo__conteudo">
+        <div class="topo__marca">
+          <span class="topo__logo">Temeron<sup>®</sup></span>
+          <span class="topo__cliente" id="topo-cliente"></span>
+        </div>
+
+        <div class="topo__acoes">
+          <span class="topo__validade" id="topo-validade"></span>
+          <button class="botao botao--fantasma" type="button" data-acao="pdf" title="Salvar esta proposta em PDF">
+            PDF
+          </button>
+          <a
+            class="botao botao--primario"
+            id="topo-zap"
+            href="#contato"
+            target="_blank"
+            rel="noopener"
+            data-zap="topo"
+          >
+            Falar comigo
+          </a>
+        </div>
+      </div>
+      <div class="topo__progresso" id="topo-progresso" aria-hidden="true"></div>
+    </header>
+
+    <!-- Estado: carregando -->
+    <div class="estado" id="estado-carregando" role="status" aria-live="polite">
+      <div class="girador" aria-hidden="true"></div>
+      <p class="estado__texto">Carregando a proposta…</p>
+    </div>
+
+    <!-- Estado: erro -->
+    <div class="estado" id="estado-erro" role="alert" hidden>
+      <p class="rotulo">Temeron<sup>®</sup></p>
+      <h1 class="estado__titulo" id="erro-titulo">Proposta não encontrada</h1>
+      <p class="estado__texto" id="erro-texto"></p>
+      <p>
+        <a class="botao botao--primario" id="erro-zap" href="#" target="_blank" rel="noopener">
+          Falar com o Ricardo
+        </a>
+      </p>
+    </div>
+
+    <!-- A proposta inteira é montada aqui -->
+    <div id="raiz"></div>
+
+    <!-- Atalho persistente para o WhatsApp -->
+    <a
+      class="zap-flutuante"
+      id="zap-flutuante"
+      href="#contato"
+      target="_blank"
+      rel="noopener"
+      data-visivel="nao"
+      data-zap="flutuante"
+    >
+      <svg class="zap-flutuante__icone" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path
+          d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884a9.82 9.82 0 0 1 6.988 2.896 9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.886-9.885 9.886m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.548 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0 0 20.464 3.488"
+        />
+      </svg>
+      <span class="zap-flutuante__texto">Falar no WhatsApp</span>
+    </a>
+
+    <noscript>
+      <div class="estado">
+        <h1 class="estado__titulo">Ative o JavaScript</h1>
+        <p class="estado__texto">
+          Esta proposta precisa de JavaScript para carregar. Se preferir, me chame no WhatsApp
+          <a href="https://wa.me/555121653538">+55 (51) 2165-3538</a> que envio em PDF.
+        </p>
+      </div>
+    </noscript>
+
+    <!-- Supabase: versão fixada de propósito, para uma atualização do CDN
+         nunca derrubar uma proposta que já está com o cliente -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+
+    <script src="/assets/js/config.js"></script>
+    <script src="/assets/js/utils.js"></script>
+    <script src="/assets/js/modelo.js"></script>
+    <script src="/assets/js/dados.js"></script>
+    <script src="/assets/js/leitor.js"></script>
+    <script src="/assets/js/proposta.js"></script>
+  </body>
+</html>

@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Temeron">
+  <rect width="64" height="64" rx="12" fill="#191919"/>
+  <path d="M16 20h32v7H36v24h-8V27H16z" fill="#ede4d3"/>
+  <circle cx="48" cy="46" r="4" fill="#da291c"/>
+</svg>

@@ -1,0 +1,123 @@
+{
+  "_comentario": "Proposta de demonstração, com o conteúdo extraído do PDF da Easyfoot. Serve para visualizar o layout antes de configurar o Supabase. Abra em /p/demo. Os campos institucionais (sobre, serviços, método, bônus, cases, depoimentos) são preenchidos automaticamente por assets/js/modelo.js.",
+
+  "titulo": "Proposta comercial com foco em gestão de marca",
+  "dataEnvio": "2026-07-28",
+  "dataValidade": "2026-08-15",
+
+  "cliente": {
+    "nome": "Easyfoot",
+    "artigo": "a",
+    "segmento": "Tecnologia e consultoria para o futebol",
+    "logo": ""
+  },
+
+  "responsavel": {
+    "nome": "Ricardo Carvalho",
+    "cargo": "Founder & Diretor Criativo",
+    "telefone": "+55 (51) 2165-3538",
+    "portfolio": "be.net/oricardocarvalho"
+  },
+
+  "diagnostico": {
+    "titulo": "",
+    "paragrafos": [
+      "A Easyfoot é tecnologia e consultoria para o futebol. Vocês entram no clube, entendem o objetivo dele e organizam processos e áreas para cumprir esse objetivo. O sistema é a porta de entrada; o trabalho vai até a consultoria de alta performance.",
+      "O problema é de percepção: quem olha o Instagram hoje vê uma empresa de software. O posicionamento de parceira do clube ainda não aparece."
+    ]
+  },
+
+  "objetivo": {
+    "titulo": "Então qual o objetivo desta proposta?",
+    "paragrafos": [
+      "{nome}, o foco desta proposta é fazer o digital da Easyfoot contar a mesma história que vocês contam quando sentam com um presidente de clube. O Instagram e o LinkedIn passam a mostrar a esteira completa: sistema, soluções e consultoria.",
+      "O objetivo é construir autoridade junto a quem decide a contratação: executivos, médicos e treinadores. Esse é um mercado com alta rotação de profissionais entre clubes, e cada pessoa que conhece a Easyfoot leva ela para o próximo clube em que trabalhar."
+    ]
+  },
+
+  "redes": ["instagram", "linkedin"],
+
+  "range": {
+    "min": 400,
+    "max": 1500,
+    "nota": "Valores mensais. O detalhamento de cada pacote está logo abaixo."
+  },
+
+  "pacotes": [
+    {
+      "nome": "Light",
+      "preco": 400,
+      "periodo": "/mensal",
+      "destaque": false,
+      "resumo": [{ "valor": "4x", "rotulo": "postagens mensais" }],
+      "itens": [
+        { "label": "Post (1 card)", "incluso": true, "valor": "2x" },
+        { "label": "Carrossel (até 10 cards)", "incluso": true, "valor": "2x" },
+        { "label": "Story*", "incluso": false, "valor": "" },
+        { "label": "Cortes de vídeos (Reels/TikTok)", "incluso": false, "valor": "" },
+        { "label": "Edição simples até 30s (Reels/TikTok)", "incluso": false, "valor": "" },
+        { "label": "Edição simples até 1min (Reels/TikTok)", "incluso": false, "valor": "" },
+        { "label": "Edição simples até 3min (Reels/TikTok)", "incluso": false, "valor": "" },
+        { "label": "Criação de conteúdo", "incluso": true, "valor": "Sim" },
+        { "label": "Construção da estratégia", "incluso": true, "valor": "Sim" },
+        { "label": "Acompanhamento de métricas (básico)", "incluso": true, "valor": "Sim" },
+        { "label": "Compartilhamento de relatórios", "incluso": false, "valor": "" }
+      ]
+    },
+    {
+      "nome": "Standard",
+      "preco": 800,
+      "periodo": "/mensal",
+      "destaque": false,
+      "resumo": [{ "valor": "8x", "rotulo": "postagens mensais" }],
+      "itens": [
+        { "label": "Post (1 card)", "incluso": true, "valor": "4x" },
+        { "label": "Carrossel (até 10 cards)", "incluso": true, "valor": "4x" },
+        { "label": "Story*", "incluso": false, "valor": "" },
+        { "label": "Cortes de vídeos (Reels/TikTok)", "incluso": false, "valor": "" },
+        { "label": "Edição simples até 30s (Reels/TikTok)", "incluso": false, "valor": "" },
+        { "label": "Edição simples até 1min (Reels/TikTok)", "incluso": false, "valor": "" },
+        { "label": "Edição simples até 3min (Reels/TikTok)", "incluso": false, "valor": "" },
+        { "label": "Criação de conteúdo", "incluso": true, "valor": "Sim" },
+        { "label": "Construção da estratégia", "incluso": true, "valor": "Sim" },
+        { "label": "Acompanhamento de métricas (básico)", "incluso": true, "valor": "Sim" },
+        { "label": "Compartilhamento de relatórios", "incluso": true, "valor": "Sim" }
+      ]
+    },
+    {
+      "nome": "Premium",
+      "preco": 1500,
+      "periodo": "/mensal",
+      "destaque": true,
+      "resumo": [
+        { "valor": "8x", "rotulo": "postagens mensais" },
+        { "valor": "4x", "rotulo": "reels mensais" }
+      ],
+      "itens": [
+        { "label": "Post (1 card)", "incluso": true, "valor": "4x" },
+        { "label": "Carrossel (até 10 cards)", "incluso": true, "valor": "4x" },
+        { "label": "Story*", "incluso": false, "valor": "" },
+        { "label": "Cortes de vídeos (Reels/TikTok)", "incluso": false, "valor": "" },
+        { "label": "Edição simples até 30s (Reels/TikTok)", "incluso": false, "valor": "" },
+        { "label": "Edição simples até 1min (Reels/TikTok)", "incluso": true, "valor": "4x" },
+        { "label": "Edição simples até 3min (Reels/TikTok)", "incluso": false, "valor": "" },
+        { "label": "Criação de conteúdo", "incluso": true, "valor": "Sim" },
+        { "label": "Construção da estratégia", "incluso": true, "valor": "Sim" },
+        { "label": "Acompanhamento de métricas (básico)", "incluso": true, "valor": "Sim" },
+        { "label": "Compartilhamento de relatórios", "incluso": true, "valor": "Sim" }
+      ]
+    }
+  ],
+
+  "observacoes": [
+    "* Stories sob demanda, conforme a rotina de bastidores do cliente.",
+    "** Edição simples inclui cortes, legendas e trilha. Não inclui motion design ou captação.",
+    "Contrato mensal, sem fidelidade. Reajuste anual pelo IPCA."
+  ],
+
+  "cta": {
+    "whatsapp": "555121653538",
+    "titulo": "vamos começar?",
+    "texto": "Se fez sentido, me chama no WhatsApp. Respondo pessoalmente e a gente ajusta o que for preciso antes de fechar."
+  }
+}

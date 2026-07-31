@@ -1,0 +1,1423 @@
+/* ==========================================================================
+   Temeron — Página pública da proposta
+   Mobile-first: o layout base é o do celular; os breakpoints só acrescentam.
+   ========================================================================== */
+
+/* ==========================================================================
+   1. Estados de carregamento e erro
+   ========================================================================== */
+
+.estado {
+  display: grid;
+  place-content: center;
+  gap: var(--esp-4);
+  min-height: 100svh;
+  padding: var(--secao-x);
+  text-align: center;
+}
+
+.estado[hidden] {
+  display: none;
+}
+
+.estado__titulo {
+  font-family: var(--fonte-display);
+  font-size: var(--texto-xl);
+}
+
+.estado__texto {
+  max-width: 34rem;
+  margin-inline: auto;
+  color: var(--papel-texto-suave);
+  font-size: var(--texto-sm);
+}
+
+.girador {
+  width: 2.5rem;
+  height: 2.5rem;
+  margin-inline: auto;
+  border: 2px solid var(--papel-borda);
+  border-top-color: var(--papel-texto);
+  border-radius: 50%;
+  animation: girar 720ms linear infinite;
+}
+
+@keyframes girar {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ==========================================================================
+   2. Barra fixa do topo
+   ========================================================================== */
+
+.topo {
+  position: fixed;
+  inset-block-start: 0;
+  inset-inline: 0;
+  z-index: var(--z-topo);
+  height: var(--altura-topo);
+  background-color: color-mix(in srgb, var(--cor-osso) 88%, transparent);
+  backdrop-filter: saturate(180%) blur(14px);
+  -webkit-backdrop-filter: saturate(180%) blur(14px);
+  border-bottom: 1px solid transparent;
+  transition:
+    border-color var(--transicao-media),
+    background-color var(--transicao-media);
+}
+
+.topo[data-rolado="sim"] {
+  border-bottom-color: var(--papel-borda);
+}
+
+.topo__conteudo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--esp-4);
+  height: 100%;
+  max-width: var(--largura-max);
+  margin-inline: auto;
+  padding-inline: var(--secao-x);
+}
+
+.topo__marca {
+  display: flex;
+  align-items: baseline;
+  gap: var(--esp-2);
+  min-width: 0;
+}
+
+.topo__logo {
+  font-family: var(--fonte-display);
+  font-size: var(--texto-sm);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.topo__cliente {
+  overflow: hidden;
+  font-size: var(--texto-xs);
+  color: var(--papel-texto-suave);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.topo__acoes {
+  display: flex;
+  align-items: center;
+  gap: var(--esp-3);
+  flex-shrink: 0;
+}
+
+.topo__validade {
+  display: none;
+  font-size: var(--texto-2xs);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--papel-texto-suave);
+}
+
+.topo__validade[data-urgente="sim"] {
+  color: var(--papel-acento);
+}
+
+/* Barra de progresso da leitura */
+.topo__progresso {
+  position: absolute;
+  inset-block-end: -1px;
+  inset-inline-start: 0;
+  height: 2px;
+  width: 100%;
+  background-color: var(--papel-acento);
+  transform: scaleX(var(--progresso, 0));
+  transform-origin: left center;
+  transition: transform 80ms linear;
+}
+
+@media (min-width: 48rem) {
+  .topo__validade {
+    display: block;
+  }
+}
+
+/* ==========================================================================
+   3. Faixa de aviso (proposta vencida)
+   ========================================================================== */
+
+.aviso-vencida {
+  position: relative;
+  z-index: var(--z-suspenso);
+  margin-top: var(--altura-topo);
+  padding: var(--esp-3) var(--secao-x);
+  font-size: var(--texto-xs);
+  font-weight: 600;
+  text-align: center;
+  color: var(--cor-branco);
+  background-color: var(--papel-acento);
+}
+
+/* ==========================================================================
+   4. Capa
+   ========================================================================== */
+
+.capa {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--esp-8);
+  min-height: 100svh;
+  padding-block: calc(var(--altura-topo) + var(--esp-8)) var(--esp-7);
+  padding-inline: var(--secao-x);
+  background-color: var(--cor-osso);
+}
+
+.capa__interno {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+  gap: var(--esp-8);
+  width: 100%;
+  max-width: var(--largura-max);
+  margin-inline: auto;
+}
+
+.capa__topo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-5);
+}
+
+.capa__cliente {
+  font-family: var(--fonte-display);
+  font-size: var(--texto-4xl);
+  font-weight: 700;
+  line-height: 0.88;
+  letter-spacing: -0.045em;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+.capa__titulo {
+  max-width: 24ch;
+  font-family: var(--fonte-display);
+  font-size: var(--texto-lg);
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  color: var(--papel-texto-suave);
+}
+
+.capa__logo-cliente {
+  width: auto;
+  max-height: 4rem;
+  margin-bottom: var(--esp-2);
+  object-fit: contain;
+  object-position: left center;
+}
+
+/* Rodapé da capa: reproduz a linha de assinatura do PDF original */
+.capa__meta {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--esp-5);
+  padding-top: var(--esp-5);
+  border-top: 1px solid var(--papel-borda);
+}
+
+.meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-1);
+  padding-left: var(--esp-4);
+  border-left: 1px solid var(--papel-texto);
+}
+
+.meta-item__rotulo {
+  font-size: var(--texto-2xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-caixa-alta);
+  text-transform: uppercase;
+  color: var(--papel-texto-suave);
+}
+
+.meta-item__valor {
+  font-size: var(--texto-sm);
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.meta-item__valor a {
+  text-decoration: none;
+}
+
+.meta-item__valor a:hover {
+  text-decoration: underline;
+}
+
+@media (min-width: 40rem) {
+  .capa__meta {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 64rem) {
+  .capa__meta {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* ==========================================================================
+   4b. Divisórias
+   --------------------------------------------------------------------------
+   No PDF, cada capítulo é aberto por um slide escuro inteiro com uma palavra
+   só ("SERVIÇOS", "BÔNUS", "CASES"). É o que dá o ritmo da apresentação —
+   aqui elas viram faixas de tela cheia entre as seções claras.
+   ========================================================================== */
+
+.divisoria {
+  display: grid;
+  align-content: center;
+  min-height: min(60svh, 30rem);
+  padding-block: var(--secao-y);
+  color: var(--cor-osso);
+  background-color: var(--cor-tinta);
+  overflow: hidden;
+}
+
+.divisoria__texto {
+  font-family: var(--fonte-display);
+  font-size: var(--texto-3xl);
+  font-weight: 700;
+  line-height: 0.92;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+.divisoria__rotulo {
+  display: block;
+  margin-bottom: var(--esp-4);
+  font-size: var(--texto-xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-caixa-alta);
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--cor-osso) 55%, transparent);
+}
+
+.divisoria__marca {
+  width: 3.5rem;
+  height: 3px;
+  margin-top: var(--esp-6);
+  background-color: var(--papel-acento);
+}
+
+/* Divisória de abertura, logo após a capa: só o nome do cliente, gigante */
+.divisoria--cliente .divisoria__texto {
+  font-size: var(--texto-4xl);
+  letter-spacing: -0.05em;
+}
+
+/* ==========================================================================
+   5. Seções de conteúdo
+   ========================================================================== */
+
+.secao__cabecalho {
+  margin-bottom: var(--esp-7);
+}
+
+.secao__titulo {
+  font-family: var(--fonte-display);
+  font-size: var(--texto-2xl);
+  font-weight: 600;
+  max-width: 16ch;
+}
+
+.secao__subtitulo {
+  max-width: 52ch;
+  margin-top: var(--esp-4);
+  color: var(--papel-texto-suave);
+}
+
+/* Layout editorial: título à esquerda, texto à direita */
+.duas-colunas {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--esp-6);
+  align-items: start;
+}
+
+.duas-colunas__titulo {
+  font-family: var(--fonte-display);
+  font-size: var(--texto-2xl);
+  font-weight: 600;
+  line-height: var(--entrelinha-apertada);
+  text-wrap: balance;
+}
+
+.duas-colunas__corpo > p + p {
+  margin-top: var(--esp-4);
+}
+
+.duas-colunas__corpo p {
+  font-size: var(--texto-lg);
+  line-height: 1.55;
+}
+
+@media (min-width: 56rem) {
+  .duas-colunas {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: var(--esp-8);
+  }
+
+  .duas-colunas--fixa .duas-colunas__titulo {
+    position: sticky;
+    top: calc(var(--altura-topo) + var(--esp-6));
+  }
+}
+
+/* ==========================================================================
+   6. Redes sociais trabalhadas
+   ========================================================================== */
+
+.redes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--esp-3);
+  margin-top: var(--esp-6);
+}
+
+.rede {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--esp-2);
+  padding: var(--esp-2) var(--esp-4);
+  font-size: var(--texto-sm);
+  font-weight: 600;
+  border: 1px solid var(--papel-borda);
+  border-radius: var(--raio-pilula);
+}
+
+.rede__ponto {
+  width: 0.4rem;
+  height: 0.4rem;
+  background-color: var(--papel-acento);
+  border-radius: 50%;
+}
+
+/* ==========================================================================
+   7. Range de investimento
+   ========================================================================== */
+
+.range {
+  text-align: center;
+}
+
+.range__rotulo {
+  display: block;
+  margin-bottom: var(--esp-5);
+  font-size: var(--texto-xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-caixa-alta);
+  text-transform: uppercase;
+  color: var(--papel-texto-suave);
+}
+
+.range__valores {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--esp-3);
+  font-family: var(--fonte-display);
+  font-size: var(--texto-3xl);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.range__traco {
+  width: 3rem;
+  height: 2px;
+  background-color: var(--papel-acento);
+}
+
+.range__nota {
+  margin-top: var(--esp-5);
+  font-size: var(--texto-sm);
+  color: var(--papel-texto-suave);
+}
+
+@media (min-width: 40rem) {
+  .range__valores {
+    flex-direction: row;
+    justify-content: center;
+    gap: var(--esp-5);
+  }
+}
+
+/* ==========================================================================
+   8. Serviços
+   ========================================================================== */
+
+.servicos {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--esp-6);
+}
+
+.servico__grupo {
+  padding-top: var(--esp-4);
+  border-top: 2px solid var(--papel-texto);
+}
+
+.servico__nome {
+  margin-bottom: var(--esp-4);
+  font-size: var(--texto-xs);
+  font-weight: 700;
+  letter-spacing: var(--tracking-caixa-alta);
+  text-transform: uppercase;
+}
+
+.servico__itens li {
+  padding-block: var(--esp-2);
+  font-size: var(--texto-sm);
+  color: var(--papel-texto-suave);
+  border-bottom: 1px solid var(--papel-borda);
+}
+
+.servico__itens li:last-child {
+  border-bottom: none;
+}
+
+@media (min-width: 40rem) {
+  .servicos {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 64rem) {
+  .servicos {
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--esp-5);
+  }
+}
+
+/* ==========================================================================
+   9. Método Âncora
+   ========================================================================== */
+
+.metodo {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--esp-6);
+  counter-reset: etapa;
+}
+
+.etapa {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-3);
+  padding-top: var(--esp-5);
+  border-top: 2px solid var(--papel-texto);
+}
+
+.etapa__numero {
+  font-family: var(--fonte-display);
+  font-size: var(--texto-2xl);
+  font-weight: 700;
+  line-height: 1;
+  color: var(--papel-acento);
+}
+
+.etapa__nome {
+  font-family: var(--fonte-display);
+  font-size: var(--texto-lg);
+  font-weight: 600;
+}
+
+.etapa__texto {
+  font-size: var(--texto-sm);
+  color: var(--papel-texto-suave);
+}
+
+@media (min-width: 56rem) {
+  .metodo {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--esp-5);
+  }
+}
+
+/* ==========================================================================
+   10. Bônus
+   ========================================================================== */
+
+.bonus {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--esp-4);
+}
+
+.bonus__card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-3);
+  padding: var(--esp-5);
+  background-color: color-mix(in srgb, var(--papel-texto) 5%, transparent);
+  border: 1px solid var(--papel-borda);
+  border-radius: var(--raio-lg);
+}
+
+.bonus__selo {
+  align-self: flex-start;
+  padding: var(--esp-1) var(--esp-3);
+  font-size: var(--texto-2xs);
+  font-weight: 700;
+  letter-spacing: var(--tracking-caixa-alta);
+  text-transform: uppercase;
+  color: var(--cor-branco);
+  background-color: var(--papel-acento);
+  border-radius: var(--raio-pilula);
+}
+
+.bonus__titulo {
+  font-family: var(--fonte-display);
+  font-size: var(--texto-lg);
+  font-weight: 600;
+}
+
+.bonus__texto {
+  font-size: var(--texto-sm);
+  color: var(--papel-texto-suave);
+}
+
+.bonus__itens {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-2);
+  margin-top: auto;
+  padding-top: var(--esp-2);
+}
+
+.bonus__itens li {
+  position: relative;
+  padding-left: var(--esp-4);
+  font-size: var(--texto-sm);
+  color: var(--papel-texto-suave);
+}
+
+.bonus__itens li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.65em;
+  width: 0.45rem;
+  height: 1px;
+  background-color: var(--papel-acento);
+}
+
+@media (min-width: 48rem) {
+  .bonus {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 64rem) {
+  .bonus {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ==========================================================================
+   11. Cases
+   ========================================================================== */
+
+.case + .case {
+  margin-top: var(--esp-8);
+  padding-top: var(--esp-8);
+  border-top: 1px solid var(--papel-borda);
+}
+
+.case__nome {
+  font-family: var(--fonte-display);
+  font-size: var(--texto-2xl);
+  font-weight: 700;
+}
+
+.case__contexto {
+  max-width: 56ch;
+  margin-top: var(--esp-4);
+  font-size: var(--texto-lg);
+  color: var(--papel-texto-suave);
+}
+
+.case__imagem {
+  width: 100%;
+  margin-top: var(--esp-6);
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  background-color: color-mix(in srgb, var(--papel-texto) 8%, transparent);
+  border-radius: var(--raio-lg);
+}
+
+.case__servicos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--esp-2);
+  margin-top: var(--esp-5);
+}
+
+.case__servico {
+  padding: var(--esp-1) var(--esp-3);
+  font-size: var(--texto-xs);
+  color: var(--papel-texto-suave);
+  border: 1px solid var(--papel-borda);
+  border-radius: var(--raio-pilula);
+}
+
+.case__transformacao {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--esp-5);
+  margin-top: var(--esp-6);
+}
+
+.case__bloco {
+  padding: var(--esp-5);
+  border: 1px solid var(--papel-borda);
+  border-radius: var(--raio-lg);
+}
+
+.case__bloco--depois {
+  background-color: color-mix(in srgb, var(--papel-texto) 5%, transparent);
+}
+
+.case__bloco-rotulo {
+  display: block;
+  margin-bottom: var(--esp-3);
+  font-size: var(--texto-2xs);
+  font-weight: 700;
+  letter-spacing: var(--tracking-caixa-alta);
+  text-transform: uppercase;
+  color: var(--papel-acento);
+}
+
+.case__bloco p {
+  font-size: var(--texto-sm);
+  color: var(--papel-texto-suave);
+}
+
+/* No PDF, o antes/depois vive num slide vermelho inteiro. Aqui vira uma faixa
+   que sangra para fora do container, mantendo o impacto. */
+.case__faixa {
+  margin-top: var(--esp-7);
+  margin-inline: calc(var(--secao-x) * -1);
+  padding: var(--secao-y) var(--secao-x);
+  color: var(--cor-branco);
+  background-color: var(--papel-acento);
+}
+
+.case__faixa .case__bloco {
+  border-color: color-mix(in srgb, #fff 35%, transparent);
+}
+
+.case__faixa .case__bloco--depois {
+  background-color: color-mix(in srgb, #000 12%, transparent);
+}
+
+.case__faixa .case__bloco-rotulo {
+  color: var(--cor-branco);
+}
+
+.case__faixa .case__bloco p {
+  color: color-mix(in srgb, #fff 88%, transparent);
+}
+
+.case__faixa .case__transformacao {
+  max-width: var(--largura-max);
+  margin-inline: auto;
+  margin-top: 0;
+}
+
+.case__numeros {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(7rem, 1fr));
+  gap: var(--esp-5);
+  margin-top: var(--esp-6);
+  padding-top: var(--esp-5);
+  border-top: 1px solid var(--papel-borda);
+}
+
+.case__numero-valor {
+  display: block;
+  font-family: var(--fonte-display);
+  font-size: var(--texto-xl);
+  font-weight: 700;
+  line-height: 1;
+}
+
+.case__numero-rotulo {
+  display: block;
+  margin-top: var(--esp-2);
+  font-size: var(--texto-xs);
+  color: var(--papel-texto-suave);
+}
+
+@media (min-width: 48rem) {
+  .case__transformacao {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ==========================================================================
+   12. Depoimentos
+   ========================================================================== */
+
+.depoimentos {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--esp-5);
+}
+
+.depoimento {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-5);
+  padding: var(--esp-6);
+  background-color: color-mix(in srgb, var(--papel-texto) 5%, transparent);
+  border-radius: var(--raio-lg);
+}
+
+.depoimento__texto {
+  flex: 1;
+  font-size: var(--texto-sm);
+  line-height: 1.65;
+}
+
+.depoimento__texto::before {
+  content: "\201C";
+  display: block;
+  margin-bottom: var(--esp-2);
+  font-family: var(--fonte-display);
+  font-size: var(--texto-2xl);
+  line-height: 0.6;
+  color: var(--papel-acento);
+}
+
+.depoimento__autor {
+  display: flex;
+  align-items: center;
+  gap: var(--esp-3);
+  padding-top: var(--esp-4);
+  border-top: 1px solid var(--papel-borda);
+}
+
+.depoimento__foto {
+  width: 2.75rem;
+  height: 2.75rem;
+  object-fit: cover;
+  border-radius: 50%;
+  background-color: color-mix(in srgb, var(--papel-texto) 12%, transparent);
+}
+
+.depoimento__nome {
+  font-size: var(--texto-sm);
+  font-weight: 700;
+}
+
+.depoimento__cargo {
+  font-size: var(--texto-xs);
+  color: var(--papel-texto-suave);
+}
+
+@media (min-width: 48rem) {
+  .depoimentos {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ==========================================================================
+   13. Pacotes — o coração comercial da página
+   ========================================================================== */
+
+.pacotes {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--esp-5);
+  align-items: stretch;
+}
+
+.pacote {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-5);
+  padding: var(--esp-6);
+  background-color: var(--cor-osso-fundo);
+  border: 1px solid var(--papel-borda);
+  border-radius: var(--raio-xl);
+  transition:
+    transform var(--transicao-media),
+    box-shadow var(--transicao-media);
+}
+
+.pacote:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--sombra-lg);
+}
+
+/* Pacote em destaque: inverte para o fundo escuro da marca */
+.pacote--destaque {
+  --papel-texto: var(--cor-osso);
+  --papel-texto-suave: color-mix(in srgb, var(--cor-osso) 62%, transparent);
+  --papel-borda: color-mix(in srgb, var(--cor-osso) 20%, transparent);
+  color: var(--cor-osso);
+  background-color: var(--cor-tinta);
+  border-color: var(--cor-tinta);
+}
+
+.pacote__selo {
+  position: absolute;
+  inset-block-start: calc(var(--esp-3) * -1);
+  inset-inline-start: var(--esp-6);
+  padding: var(--esp-1) var(--esp-4);
+  font-size: var(--texto-2xs);
+  font-weight: 700;
+  letter-spacing: var(--tracking-caixa-alta);
+  text-transform: uppercase;
+  color: var(--cor-branco);
+  background-color: var(--papel-acento);
+  border-radius: var(--raio-pilula);
+}
+
+.pacote--destaque {
+  position: relative;
+}
+
+.pacote__nome {
+  font-family: var(--fonte-display);
+  font-size: var(--texto-xl);
+  font-weight: 700;
+}
+
+.pacote__preco {
+  display: flex;
+  align-items: baseline;
+  gap: 0.15em;
+  font-family: var(--fonte-display);
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.pacote__preco-simbolo {
+  font-size: var(--texto-md);
+  font-weight: 600;
+}
+
+.pacote__preco-inteiro {
+  font-size: var(--texto-3xl);
+  font-weight: 700;
+}
+
+.pacote__preco-centavos {
+  font-size: var(--texto-md);
+  font-weight: 600;
+}
+
+.pacote__preco-periodo {
+  margin-left: var(--esp-1);
+  font-family: var(--fonte-texto);
+  font-size: var(--texto-sm);
+  font-weight: 500;
+  letter-spacing: 0;
+  color: var(--papel-texto-suave);
+}
+
+.pacote__sob-consulta {
+  font-family: var(--fonte-display);
+  font-size: var(--texto-xl);
+  font-weight: 600;
+}
+
+/* Faixa de números-chave: "8x postagens mensais" */
+.pacote__resumo {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--esp-4);
+  padding: var(--esp-4) 0;
+  border-block: 1px solid var(--papel-borda);
+}
+
+.pacote__resumo-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-1);
+}
+
+.pacote__resumo-valor {
+  font-family: var(--fonte-display);
+  font-size: var(--texto-lg);
+  font-weight: 700;
+  line-height: 1;
+  color: var(--papel-acento);
+}
+
+.pacote--destaque .pacote__resumo-valor {
+  color: var(--cor-osso);
+}
+
+.pacote__resumo-rotulo {
+  font-size: var(--texto-2xs);
+  line-height: 1.3;
+  color: var(--papel-texto-suave);
+}
+
+.pacote__itens {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: var(--esp-1);
+}
+
+.pacote__item {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--esp-3);
+  padding-block: var(--esp-2);
+  font-size: var(--texto-sm);
+  border-bottom: 1px solid color-mix(in srgb, var(--papel-borda) 60%, transparent);
+}
+
+.pacote__item:last-child {
+  border-bottom: none;
+}
+
+.pacote__item--ausente {
+  opacity: 0.42;
+}
+
+.pacote__item-label {
+  min-width: 0;
+}
+
+.pacote__item-valor {
+  flex-shrink: 0;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.pacote__item--ausente .pacote__item-valor {
+  font-weight: 500;
+}
+
+.pacote__cta {
+  margin-top: auto;
+}
+
+.pacote--destaque .botao--contorno {
+  color: var(--cor-osso);
+  border-color: color-mix(in srgb, var(--cor-osso) 40%, transparent);
+}
+
+.pacote--destaque .botao--contorno:hover {
+  color: var(--cor-tinta);
+  background-color: var(--cor-osso);
+  border-color: var(--cor-osso);
+}
+
+.observacoes {
+  margin-top: var(--esp-6);
+  font-size: var(--texto-xs);
+  color: var(--papel-texto-suave);
+}
+
+.observacoes li + li {
+  margin-top: var(--esp-2);
+}
+
+@media (min-width: 52rem) {
+  .pacotes {
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  }
+}
+
+/* ==========================================================================
+   14. Expansões
+   ========================================================================== */
+
+.expansoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--esp-3);
+  margin-top: var(--esp-6);
+}
+
+.expansoes li {
+  padding: var(--esp-3) var(--esp-5);
+  font-family: var(--fonte-display);
+  font-size: var(--texto-md);
+  font-weight: 600;
+  border: 1px solid var(--papel-borda);
+  border-radius: var(--raio-pilula);
+}
+
+.expansoes__fecho {
+  margin-top: var(--esp-6);
+  font-family: var(--fonte-display);
+  font-size: var(--texto-xl);
+  font-weight: 600;
+  color: var(--papel-acento);
+}
+
+/* ==========================================================================
+   15. Chamada final
+   ========================================================================== */
+
+.chamada {
+  text-align: center;
+}
+
+.chamada__titulo {
+  font-family: var(--fonte-display);
+  font-size: var(--texto-3xl);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+}
+
+.chamada__texto {
+  max-width: 44ch;
+  margin: var(--esp-5) auto 0;
+  font-size: var(--texto-lg);
+  color: var(--papel-texto-suave);
+}
+
+.chamada__acoes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--esp-3);
+  margin-top: var(--esp-6);
+}
+
+.chamada__validade {
+  margin-top: var(--esp-5);
+  font-size: var(--texto-xs);
+  color: var(--papel-texto-suave);
+}
+
+@media (min-width: 40rem) {
+  .chamada__acoes {
+    flex-direction: row;
+    justify-content: center;
+  }
+}
+
+/* ==========================================================================
+   15b. Saudação — o leitor se identifica
+   --------------------------------------------------------------------------
+   Fica logo abaixo da capa. Não bloqueia a leitura: quem não quiser
+   preencher simplesmente rola a página.
+   ========================================================================== */
+
+.saudacao {
+  padding-block: var(--esp-7);
+  background-color: var(--cor-osso-fundo);
+  border-block: 1px solid var(--papel-borda);
+}
+
+.saudacao__caixa {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-4);
+  max-width: 46rem;
+}
+
+.saudacao__titulo {
+  font-family: var(--fonte-display);
+  font-size: var(--texto-lg);
+  font-weight: 600;
+}
+
+.saudacao__texto {
+  font-size: var(--texto-sm);
+  color: var(--papel-texto-suave);
+}
+
+.saudacao__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-3);
+}
+
+.saudacao__campo {
+  flex: 1;
+  min-width: 0;
+  padding: var(--esp-3) var(--esp-4);
+  font-size: var(--texto-md);
+  color: var(--papel-texto);
+  background-color: var(--cor-branco);
+  border: 1px solid var(--papel-borda);
+  border-radius: var(--raio-md);
+}
+
+.saudacao__campo:focus {
+  outline: none;
+  border-color: var(--papel-texto);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--papel-texto) 10%, transparent);
+}
+
+/* Estado "já sei quem é você" */
+.saudacao__confirmado {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--esp-3);
+  font-size: var(--texto-sm);
+}
+
+.saudacao__nome {
+  font-weight: 700;
+}
+
+.saudacao__trocar {
+  padding: var(--esp-1) var(--esp-2);
+  font-size: var(--texto-xs);
+  font-weight: 600;
+  color: var(--papel-texto-suave);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.saudacao__trocar:hover {
+  color: var(--papel-acento);
+}
+
+@media (min-width: 34rem) {
+  .saudacao__form {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .saudacao__form .botao {
+    flex-shrink: 0;
+  }
+}
+
+/* ==========================================================================
+   16. Rodapé
+   ========================================================================== */
+
+.rodape {
+  padding-block: var(--esp-7);
+  font-size: var(--texto-xs);
+  color: var(--papel-texto-suave);
+  background-color: var(--papel-fundo);
+}
+
+.rodape__conteudo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-4);
+  align-items: center;
+  text-align: center;
+}
+
+.rodape__links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--esp-4);
+}
+
+.rodape__links a {
+  /* Alvo de toque confortável no celular sem virar um botão visualmente */
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.75rem;
+  text-decoration: none;
+}
+
+.rodape__links a:hover {
+  color: var(--papel-texto);
+  text-decoration: underline;
+}
+
+@media (min-width: 48rem) {
+  .rodape__conteudo {
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
+  }
+}
+
+/* ==========================================================================
+   17. Botão flutuante do WhatsApp
+   ========================================================================== */
+
+.zap-flutuante {
+  position: fixed;
+  inset-block-end: var(--esp-5);
+  inset-inline-end: var(--esp-5);
+  z-index: var(--z-flutuante);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--esp-3);
+  padding: var(--esp-4);
+  color: var(--cor-branco);
+  background-color: #25d366;
+  border-radius: var(--raio-pilula);
+  box-shadow: var(--sombra-lg);
+  text-decoration: none;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(0.75rem) scale(0.94);
+  transition:
+    opacity var(--transicao-media),
+    transform var(--transicao-media),
+    visibility var(--transicao-media);
+}
+
+.zap-flutuante[data-visivel="sim"] {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+}
+
+.zap-flutuante:hover {
+  transform: translateY(-2px) scale(1.02);
+}
+
+.zap-flutuante__icone {
+  width: 1.5rem;
+  height: 1.5rem;
+  flex-shrink: 0;
+}
+
+.zap-flutuante__texto {
+  display: none;
+  font-size: var(--texto-sm);
+  font-weight: 600;
+  padding-right: var(--esp-2);
+}
+
+@media (min-width: 48rem) {
+  .zap-flutuante {
+    padding: var(--esp-3) var(--esp-4);
+  }
+
+  .zap-flutuante__texto {
+    display: block;
+  }
+}
+
+/* ==========================================================================
+   18. Revelação no scroll
+   ========================================================================== */
+
+.revelar {
+  opacity: 0;
+  transform: translateY(1.25rem);
+  transition:
+    opacity var(--transicao-lenta),
+    transform var(--transicao-lenta);
+}
+
+.revelar[data-visivel="sim"] {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .revelar {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ==========================================================================
+   19. Impressão — o cliente pode querer salvar em PDF
+   ========================================================================== */
+
+@media print {
+  /* O objetivo aqui é gerar um PDF de arquivo com a cara do site, não uma
+     versão econômica em tinta — por isso os fundos são preservados. */
+  @page {
+    size: A4;
+    margin: 12mm;
+  }
+
+  :root {
+    --secao-y: 1.6rem;
+    --secao-x: 0;
+  }
+
+  html,
+  body {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .topo,
+  .zap-flutuante,
+  .pular-para-conteudo,
+  .saudacao__form,
+  .saudacao__trocar,
+  .pacote__cta,
+  .chamada__acoes {
+    display: none !important;
+  }
+
+  .revelar {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .capa {
+    min-height: auto;
+    padding-block: var(--esp-6);
+  }
+
+  .divisoria {
+    min-height: auto;
+    padding-block: var(--esp-6);
+  }
+
+  /* Cada capítulo começa em página nova */
+  .divisoria,
+  #pacotes,
+  #cases {
+    break-before: page;
+  }
+
+  .secao,
+  .case,
+  .pacote,
+  .depoimento,
+  .bonus__card,
+  .etapa {
+    break-inside: avoid;
+  }
+
+  .pacotes {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--esp-3);
+  }
+
+  .pacote {
+    box-shadow: none;
+    transform: none !important;
+  }
+
+  /* Sem o botão de WhatsApp, o telefone precisa aparecer escrito */
+  .chamada::after {
+    content: "Contato: " attr(data-contato);
+    display: block;
+    margin-top: var(--esp-5);
+    font-weight: 600;
+  }
+}

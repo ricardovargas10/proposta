@@ -1,0 +1,112 @@
+/* ==========================================================================
+   Temeron — Design tokens
+   Paleta extraída da proposta original (PDF).
+   Alterar aqui reflete em toda a aplicação: proposta pública e admin.
+   ========================================================================== */
+
+:root {
+  /* --- Cor: marca ------------------------------------------------------ */
+  --cor-osso: #ede4d3;          /* fundo principal (0.929 0.894 0.827) */
+  --cor-osso-fundo: #f5f0e6;    /* variação clara para blocos internos  */
+  --cor-tinta: #191919;         /* texto principal (0.098 0.098 0.098)  */
+  --cor-tinta-suave: #262525;   /* superfícies escuras                  */
+  --cor-vermelho: #da291c;      /* acento (0.855 0.161 0.11)            */
+  --cor-branco: #ffffff;
+
+  /* --- Cor: neutros ---------------------------------------------------- */
+  --cor-cinza-900: #1f1f1f;
+  --cor-cinza-700: #4e4e4e;
+  --cor-cinza-500: #8a8a8a;
+  --cor-cinza-300: #b7b7b7;
+  --cor-cinza-100: #e6e1d6;
+
+  /* --- Cor: papéis semânticos ------------------------------------------ */
+  --papel-fundo: var(--cor-osso);
+  --papel-texto: var(--cor-tinta);
+  --papel-texto-suave: color-mix(in srgb, var(--cor-tinta) 62%, transparent);
+  --papel-borda: color-mix(in srgb, var(--cor-tinta) 16%, transparent);
+  --papel-acento: var(--cor-vermelho);
+
+  /* --- Cor: estados ---------------------------------------------------- */
+  --cor-sucesso: #2f7d4f;
+  --cor-alerta: #b8860b;
+  --cor-erro: #c0392b;
+
+  /* --- Tipografia ------------------------------------------------------ */
+  --fonte-display: "Inter Tight", "Inter", "Helvetica Neue", Arial, sans-serif;
+  --fonte-texto: "Inter", "Helvetica Neue", Arial, sans-serif;
+  --fonte-mono: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, monospace;
+
+  /* Escala fluida — min em 360px, max em 1440px */
+  --texto-2xs: clamp(0.68rem, 0.66rem + 0.10vw, 0.75rem);
+  --texto-xs:  clamp(0.75rem, 0.72rem + 0.15vw, 0.85rem);
+  --texto-sm:  clamp(0.87rem, 0.84rem + 0.18vw, 0.98rem);
+  --texto-md:  clamp(1rem, 0.95rem + 0.25vw, 1.15rem);
+  --texto-lg:  clamp(1.15rem, 1.05rem + 0.45vw, 1.45rem);
+  --texto-xl:  clamp(1.4rem, 1.2rem + 0.9vw, 2.1rem);
+  --texto-2xl: clamp(1.9rem, 1.5rem + 1.8vw, 3.2rem);
+  --texto-3xl: clamp(2.6rem, 1.9rem + 3.2vw, 5rem);
+  --texto-4xl: clamp(3.4rem, 2.1rem + 5.8vw, 8rem);
+
+  --entrelinha-apertada: 0.95;
+  --entrelinha-titulo: 1.08;
+  --entrelinha-texto: 1.6;
+
+  --tracking-display: -0.035em;
+  --tracking-caixa-alta: 0.08em;
+
+  /* --- Espaçamento (escala 4px) ---------------------------------------- */
+  --esp-1: 0.25rem;
+  --esp-2: 0.5rem;
+  --esp-3: 0.75rem;
+  --esp-4: 1rem;
+  --esp-5: 1.5rem;
+  --esp-6: 2rem;
+  --esp-7: 3rem;
+  --esp-8: 4rem;
+  --esp-9: 6rem;
+  --esp-10: 8rem;
+
+  /* Respiro vertical das seções — encolhe no mobile */
+  --secao-y: clamp(3.5rem, 2rem + 7vw, 9rem);
+  --secao-x: clamp(1.25rem, 0.5rem + 3.5vw, 5rem);
+
+  /* --- Layout ---------------------------------------------------------- */
+  --largura-max: 78rem;
+  --largura-texto: 42rem;
+  --altura-topo: 4rem;
+
+  /* --- Forma ----------------------------------------------------------- */
+  --raio-sm: 4px;
+  --raio-md: 8px;
+  --raio-lg: 16px;
+  --raio-xl: 28px;
+  --raio-pilula: 999px;
+
+  /* --- Elevação -------------------------------------------------------- */
+  --sombra-sm: 0 1px 2px rgb(25 25 25 / 0.06), 0 1px 3px rgb(25 25 25 / 0.08);
+  --sombra-md: 0 4px 12px rgb(25 25 25 / 0.08), 0 2px 4px rgb(25 25 25 / 0.06);
+  --sombra-lg: 0 18px 40px rgb(25 25 25 / 0.14), 0 4px 10px rgb(25 25 25 / 0.06);
+
+  /* --- Movimento ------------------------------------------------------- */
+  --transicao-rapida: 140ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transicao-media: 260ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transicao-lenta: 640ms cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* --- Camadas --------------------------------------------------------- */
+  --z-base: 1;
+  --z-suspenso: 10;
+  --z-topo: 100;
+  --z-flutuante: 200;
+  --z-modal: 300;
+  --z-aviso: 400;
+}
+
+/* Bloco de conteúdo em fundo escuro: inverte os papéis semânticos.
+   Qualquer componente que use as variáveis "--papel-*" se adapta sozinho. */
+.tema-escuro {
+  --papel-fundo: var(--cor-tinta);
+  --papel-texto: var(--cor-osso);
+  --papel-texto-suave: color-mix(in srgb, var(--cor-osso) 60%, transparent);
+  --papel-borda: color-mix(in srgb, var(--cor-osso) 18%, transparent);
+}

@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Editar proposta — Painel Temeron</title>
+
+    <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700&display=swap"
+    />
+
+    <link rel="stylesheet" href="/assets/css/tokens.css" />
+    <link rel="stylesheet" href="/assets/css/base.css" />
+    <link rel="stylesheet" href="/assets/css/admin.css" />
+  </head>
+
+  <body>
+    <header class="barra">
+      <div class="barra__conteudo">
+        <a class="barra__marca" href="/admin/">
+          Temeron<sup>®</sup>
+          <span class="barra__divisor" aria-hidden="true"></span>
+          <span class="barra__contexto" id="contexto">Nova proposta</span>
+        </a>
+
+        <div class="barra__acoes">
+          <a class="botao botao--fantasma" href="/admin/">Voltar</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="pagina" id="pagina" hidden>
+      <p class="nota nota--info" id="faixa-demo" hidden style="margin-bottom: var(--esp-5)">
+        <strong>Modo demonstração.</strong> Esta proposta fica salva só neste navegador. Configure o
+        Supabase em <code>assets/js/config.js</code> para publicar links de verdade.
+      </p>
+
+      <div class="editor">
+        <nav class="editor__nav" id="editor-nav" aria-label="Seções da proposta">
+          <a class="editor__nav-item" href="#bloco-cliente">Cliente</a>
+          <a class="editor__nav-item" href="#bloco-textos">Textos</a>
+          <a class="editor__nav-item" href="#bloco-pacotes">Pacotes</a>
+          <a class="editor__nav-item" href="#bloco-publicacao">Publicação</a>
+        </nav>
+
+        <form id="form-proposta" novalidate>
+          <!-- ============ CLIENTE ============ -->
+          <section class="bloco" id="bloco-cliente">
+            <h2 class="bloco__titulo">Cliente e datas</h2>
+            <p class="bloco__descricao">
+              O nome aparece na capa, na divisória de abertura e nas mensagens de WhatsApp que
+              chegam até você.
+            </p>
+
+            <div class="campos campos--2">
+              <div class="campo">
+                <label class="campo__rotulo" for="cliente-nome">Nome do cliente *</label>
+                <input
+                  class="entrada"
+                  type="text"
+                  id="cliente-nome"
+                  data-caminho="cliente.nome"
+                  placeholder="Easyfoot"
+                  required
+                />
+                <span class="campo__erro" id="erro-cliente-nome" hidden></span>
+              </div>
+
+              <div class="campo">
+                <label class="campo__rotulo" for="cliente-artigo">Artigo</label>
+                <select class="selecao" id="cliente-artigo" data-caminho="cliente.artigo">
+                  <option value="a">a — "Quem é a Easyfoot?"</option>
+                  <option value="o">o — "Quem é o Grêmio?"</option>
+                  <option value="">nenhum — "Quem é Nike?"</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="campo">
+              <label class="campo__rotulo" for="cliente-logo">Logo do cliente</label>
+              <input
+                class="entrada"
+                type="text"
+                id="cliente-logo"
+                data-caminho="cliente.logo"
+                placeholder="/assets/img/clientes/easyfoot.svg"
+              />
+              <span class="campo__dica">
+                Aparece na entrada, acima do nome. Suba o arquivo em
+                <code>assets/img/clientes/</code> e cole o caminho aqui.
+              </span>
+            </div>
+
+            <div class="campos campos--2">
+              <div class="campo">
+                <label class="campo__rotulo" for="data-envio">Data de envio</label>
+                <input class="entrada" type="date" id="data-envio" data-caminho="dataEnvio" />
+              </div>
+
+              <div class="campo">
+                <label class="campo__rotulo" for="data-validade">Data de validade</label>
+                <input class="entrada" type="date" id="data-validade" data-caminho="dataValidade" />
+                <span class="campo__dica">
+                  A proposta mostra um contador e avisa o cliente quando passa da data.
+                </span>
+              </div>
+            </div>
+          </section>
+
+          <!-- ============ TEXTOS ============ -->
+          <section class="bloco" id="bloco-textos">
+            <h2 class="bloco__titulo">Textos de apoio</h2>
+            <p class="bloco__descricao">
+              Os únicos textos que mudam de proposta para proposta. Todo o resto — Temeron, método,
+              bônus, cases, depoimentos — já está pronto e igual em todas.
+            </p>
+
+            <div class="campo">
+              <span class="campo__rotulo">Diagnóstico — "Quem é <span id="eco-cliente">a empresa</span>?"</span>
+              <div class="repetidor" data-lista="diagnostico.paragrafos" data-tipo="texto-longo"></div>
+              <button class="botao botao--contorno" type="button" data-adicionar="diagnostico.paragrafos">
+                + Parágrafo
+              </button>
+              <span class="campo__dica">
+                O que você entendeu sobre o cliente. É o trecho que prova que a proposta não é
+                template.
+              </span>
+            </div>
+
+            <hr style="margin-block: var(--esp-6)" />
+
+            <div class="campo">
+              <label class="campo__rotulo" for="objetivo-titulo">Objetivo — título</label>
+              <input class="entrada" type="text" id="objetivo-titulo" data-caminho="objetivo.titulo" />
+            </div>
+
+            <div class="campo">
+              <span class="campo__rotulo">Objetivo — parágrafos</span>
+              <div class="repetidor" data-lista="objetivo.paragrafos" data-tipo="texto-longo"></div>
+              <button class="botao botao--contorno" type="button" data-adicionar="objetivo.paragrafos">
+                + Parágrafo
+              </button>
+            </div>
+
+            <hr style="margin-block: var(--esp-6)" />
+
+            <div class="campo">
+              <span class="campo__rotulo">Redes sociais que serão trabalhadas</span>
+              <div class="marcadores" id="redes"></div>
+            </div>
+
+            <p class="nota nota--info" style="margin-top: var(--esp-5)">
+              Em qualquer texto acima você pode escrever <code>{nome}</code>. Ele vira o nome de
+              quem estiver lendo a proposta — e some sozinho se a pessoa não se identificar.
+            </p>
+          </section>
+
+          <!-- ============ PACOTES ============ -->
+          <section class="bloco" id="bloco-pacotes">
+            <h2 class="bloco__titulo">Investimento</h2>
+            <p class="bloco__descricao">
+              O range abre a parte comercial, em fundo escuro. Deixando em branco, ele é calculado
+              a partir dos preços dos pacotes.
+            </p>
+
+            <div class="campos campos--3">
+              <div class="campo">
+                <label class="campo__rotulo" for="range-min">Range — de (R$)</label>
+                <input
+                  class="entrada"
+                  type="text"
+                  id="range-min"
+                  data-caminho="range.min"
+                  data-numero="sim"
+                  inputmode="decimal"
+                  placeholder="400"
+                />
+              </div>
+
+              <div class="campo">
+                <label class="campo__rotulo" for="range-max">Range — até (R$)</label>
+                <input
+                  class="entrada"
+                  type="text"
+                  id="range-max"
+                  data-caminho="range.max"
+                  data-numero="sim"
+                  inputmode="decimal"
+                  placeholder="1500"
+                />
+              </div>
+            </div>
+
+            <div class="campo">
+              <label class="campo__rotulo" for="range-nota">Observação abaixo do range</label>
+              <input class="entrada" type="text" id="range-nota" data-caminho="range.nota" />
+            </div>
+
+            <hr style="margin-block: var(--esp-6)" />
+
+            <h3 class="bloco__titulo" style="font-size: var(--texto-md)">Pacotes</h3>
+            <p class="bloco__descricao">
+              Marque o que entra em cada pacote. O que ficar desmarcado aparece acinzentado na
+              proposta — é isso que mostra ao cliente o que ele ganha subindo de nível.
+            </p>
+
+            <div id="pacotes"></div>
+
+            <div class="campo">
+              <button class="botao botao--contorno" type="button" id="adicionar-pacote">
+                + Adicionar pacote
+              </button>
+              <button class="botao botao--fantasma" type="button" id="adicionar-linha-todos">
+                + Nova linha em todos os pacotes
+              </button>
+            </div>
+
+            <hr style="margin-block: var(--esp-6)" />
+
+            <div class="campo">
+              <span class="campo__rotulo">Observações (letra miúda abaixo dos pacotes)</span>
+              <div class="repetidor" data-lista="observacoes" data-tipo="texto"></div>
+              <button class="botao botao--contorno" type="button" data-adicionar="observacoes">
+                + Observação
+              </button>
+            </div>
+          </section>
+
+          <!-- ============ PUBLICAÇÃO ============ -->
+          <section class="bloco" id="bloco-publicacao">
+            <h2 class="bloco__titulo">Publicação</h2>
+            <p class="bloco__descricao">
+              Enquanto estiver como rascunho, o link não abre para ninguém.
+            </p>
+
+            <div class="campo">
+              <label class="campo__rotulo" for="status">Status</label>
+              <select class="selecao entrada--curta" id="status" data-caminho="status">
+                <option value="rascunho">Rascunho (link não funciona)</option>
+                <option value="publicada">Publicada (link no ar)</option>
+                <option value="arquivada">Arquivada (link desativado)</option>
+              </select>
+            </div>
+
+            <div class="campo">
+              <label class="campo__rotulo" for="slug">Endereço do link</label>
+              <div class="repetidor__linha">
+                <input class="entrada" type="text" id="slug" data-caminho="slug" />
+                <button class="botao botao--contorno" type="button" id="gerar-slug">Gerar</button>
+              </div>
+              <span class="campo__dica">
+                O código aleatório no fim impede que alguém adivinhe o link de outro cliente e veja
+                os valores que você cobrou.
+              </span>
+              <span class="campo__erro" id="erro-slug" hidden></span>
+            </div>
+
+            <div class="campo">
+              <span class="campo__rotulo">Link para enviar ao cliente</span>
+              <div class="link-publico">
+                <span class="link-publico__url" id="link-publico"></span>
+                <button class="botao botao--contorno" type="button" id="copiar-link">Copiar</button>
+                <a class="botao botao--fantasma" id="abrir-link" href="#" target="_blank" rel="noopener">
+                  Abrir
+                </a>
+              </div>
+            </div>
+
+            <details style="margin-top: var(--esp-6)">
+              <summary style="cursor: pointer; font-size: var(--texto-sm); font-weight: 600">
+                Ajustar contato e chamada final
+              </summary>
+
+              <div style="margin-top: var(--esp-5)">
+                <div class="campos campos--2">
+                  <div class="campo">
+                    <label class="campo__rotulo" for="cta-whatsapp">WhatsApp que recebe os contatos</label>
+                    <input
+                      class="entrada"
+                      type="text"
+                      id="cta-whatsapp"
+                      data-caminho="cta.whatsapp"
+                      inputmode="numeric"
+                    />
+                  </div>
+
+                  <div class="campo">
+                    <label class="campo__rotulo" for="cta-titulo">Título da chamada final</label>
+                    <input class="entrada" type="text" id="cta-titulo" data-caminho="cta.titulo" />
+                  </div>
+                </div>
+
+                <div class="campo">
+                  <label class="campo__rotulo" for="cta-texto">Texto da chamada final</label>
+                  <textarea class="area" id="cta-texto" data-caminho="cta.texto"></textarea>
+                </div>
+              </div>
+            </details>
+          </section>
+
+          <!-- ============ AÇÕES ============ -->
+          <div class="acoes-fixas">
+            <span class="acoes-fixas__estado" id="estado-salvamento">Nada alterado ainda.</span>
+            <div class="acoes-fixas__botoes">
+              <button class="botao botao--contorno" type="button" id="salvar">Salvar</button>
+              <button class="botao botao--primario" type="button" id="salvar-publicar">
+                Salvar e publicar
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </main>
+
+    <div class="pagina" id="pagina-estado">
+      <p class="pagina__subtitulo" id="estado-texto">Carregando…</p>
+      <p class="nota nota--erro" id="estado-erro" hidden></p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+    <script src="/assets/js/config.js"></script>
+    <script src="/assets/js/utils.js"></script>
+    <script src="/assets/js/modelo.js"></script>
+    <script src="/assets/js/dados.js"></script>
+    <script src="/assets/js/ui.js"></script>
+    <script src="/assets/js/editor.js"></script>
+  </body>
+</html>

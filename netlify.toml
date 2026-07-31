@@ -1,0 +1,67 @@
+# ============================================================================
+# Temeron — Configuração do Netlify
+# Site estático puro: não há etapa de build, o Netlify só serve os arquivos.
+# ============================================================================
+
+[build]
+  publish = "."
+  command = ""
+
+# ----------------------------------------------------------------------------
+# Reescritas de URL
+# ----------------------------------------------------------------------------
+# O link enviado ao cliente é /p/easyfoot-x7k2p9. O Netlify entrega o
+# proposta.html sem mudar o endereço (status 200 = reescrita, não redirect),
+# e o JavaScript lê o slug do caminho.
+#
+# Se mudar algo aqui, espelhe em ferramentas/servidor-local.ps1 para a
+# pré-visualização local continuar batendo com a produção.
+# ----------------------------------------------------------------------------
+
+[[redirects]]
+  from = "/p/*"
+  to = "/proposta.html"
+  status = 200
+
+[[redirects]]
+  from = "/admin"
+  to = "/admin/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/admin/editor"
+  to = "/admin/editor.html"
+  status = 200
+
+# ----------------------------------------------------------------------------
+# Cabeçalhos
+# ----------------------------------------------------------------------------
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), interest-cohort=()"
+    # 'unsafe-inline' em style-src: a página usa alguns atributos style.
+    # Nenhum script inline é usado, por isso script-src fica restrito.
+    Content-Security-Policy = "default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://*.supabase.co wss://*.supabase.co; form-action 'self'; frame-ancestors 'self'; base-uri 'self'"
+
+# Propostas são documentos comerciais privados: fora dos buscadores.
+[[headers]]
+  for = "/p/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+
+[[headers]]
+  for = "/admin/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+
+# Os arquivos mudam a cada publicação e são pequenos: sem cache agressivo,
+# para uma correção de preço nunca ficar presa no navegador do cliente.
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
